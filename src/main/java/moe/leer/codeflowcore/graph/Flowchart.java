@@ -76,7 +76,7 @@ public class Flowchart {
     FlowchartNode node = uniqueFcNode(exp, type)
         .add(shape, Color.named(FlowchartConfig.functionColor), Style.FILLED);
     if (type == FlowchartNodeType.END) {
-      node.add(Style.ROUNDED.and(Style.FILLED));
+      node.add(Style.ROUNDED.combine(Style.FILLED));
     }
     return node;
   }

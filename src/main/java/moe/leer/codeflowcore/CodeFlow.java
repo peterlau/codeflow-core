@@ -4,6 +4,7 @@ import guru.nidi.graphviz.engine.Engine;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.engine.GraphvizException;
+import guru.nidi.graphviz.engine.GraphvizCmdLineEngine;
 import guru.nidi.graphviz.model.MutableGraph;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,6 @@ import moe.leer.codeflowcore.lang.parser.CodeFlowParser;
 import moe.leer.codeflowcore.lang.semantic.ScopesManager;
 import moe.leer.codeflowcore.lang.semantic.SymbolDefListener;
 import moe.leer.codeflowcore.lang.semantic.SymbolResolveListener;
-import moe.leer.codeflowcore.util.NativeUtil;
 import moe.leer.codeflowcore.util.ProgramTimer;
 import moe.leer.codeflowcore.util.SomeUtil;
 import org.antlr.v4.runtime.CharStream;
@@ -90,10 +90,11 @@ public class CodeFlow {
   // use graphviz native binding
   private boolean useNative;
 
+  /*
   static {
     NativeUtil.loadLibraryFromResource("gv");
   }
-
+  */
   /**
    * height and width are ignored when <code>useIgnore</code> is true
    */
@@ -126,6 +127,8 @@ public class CodeFlow {
     this.workDir = workDir;
     this.outDir = outDir;
     this.format = format;
+
+    Graphviz.useEngine(new GraphvizCmdLineEngine());
   }
 
   public CodeFlow parse(@NotNull Supplier<String> supplier) throws CodeFlowException {
